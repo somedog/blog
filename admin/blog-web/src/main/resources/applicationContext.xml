@@ -23,14 +23,6 @@
     http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
     <!--自动扫描-->
     <context:component-scan base-package="com.blog"></context:component-scan>
-    <!--&lt;!&ndash;读取配置文件&ndash;&gt;-->
-    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="locations">-->
-            <!--<array>-->
-                <!--<value>classpath:app.properties</value>-->
-            <!--</array>-->
-        <!--</property>-->
-    <!--</bean>-->
     <!--  读取配置文件 -->
     <context:property-placeholder location="classpath:app.properties" />
     <!--配置jdbc连接池-->
@@ -41,34 +33,23 @@
         <property name="password" value="${jdbc.password}"></property>
         <property name="maxIdleTime" value="${jdbc.maxIdleTime}"></property>
     </bean>
-    <!--配置mybatis-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <!--支持orcal和mysql-->
-        <property name="databaseIdProvider" ref="databaseIdProvider" />
-        <property name="configuration">
-            <bean class="org.apache.ibatis.session.Configuration">
-                <property name="mapUnderscoreToCamelCase" value="true" />
-            </bean>
-        </property>
-    </bean>
-    <bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
-        <property name="properties" ref="vendorProperties" />
-    </bean>
-    <!-- 配置多版本数据库兼容支持 -->
-    <bean id="vendorProperties"
-          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="properties">
-            <props>
-                <prop key="Oracle">oracle</prop>
-                <prop key="MySQL">mysql</prop>
-            </props>
-        </property>
-    </bean>
-    <!--自动扫描mapper接口所在的所有类-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.blog.app.po"></property>
+        <property name="basePackage" value="com.blog.app.mapping" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    <!--配置mybatis-->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:com.blog.app/mapping/*Mapper.xml"></property>
+        <property name="typeAliasesPackage" value="com.blog.app.po"></property>
+        <property name="plugins">
+            <array>
+                <!-- 分页插件配置 -->
+                <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+                    <property name="dialectType" value="mysql"/>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!--配置事务管理-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

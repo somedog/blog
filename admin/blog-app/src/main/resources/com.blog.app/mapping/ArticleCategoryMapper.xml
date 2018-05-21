@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.app.mapping.ArticleCategoryMapper">
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.blog.app.po.ArticleCategory">
+		<id column="id" property="id" />
+		<result column="category" property="category" />
+		<result column="description" property="description" />
+		<result column="article_name" property="articleName" />
+		<result column="article_sign" property="articleSign" />
+		<result column="article_author" property="articleAuthor" />
+		<result column="newdate" property="newdate" />
+		<result column="modifydate" property="modifydate" />
+		<result column="deletedate" property="deletedate" />
+		<result column="delete_user" property="deleteUser" />
+		<result column="isdelete" property="isdelete" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, category, description, article_name AS articleName, article_sign AS articleSign, article_author AS articleAuthor, newdate, modifydate, deletedate, delete_user AS deleteUser, isdelete
+    </sql>
+
+</mapper>

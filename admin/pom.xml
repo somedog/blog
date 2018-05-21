@@ -17,10 +17,12 @@
     <mysql_version>5.1.22</mysql_version>
     <spring_version>4.3.2.RELEASE</spring_version>
     <jackson_version>2.8.2</jackson_version>
-    <mybatis_version>3.4.0</mybatis_version>
+    <mybatis_version>3.4.2</mybatis_version>
     <mybatis_spring_version>1.3.0</mybatis_spring_version>
     <jedis_version>2.9.0</jedis_version>
     <shiro_version>1.2.5</shiro_version>
+    <!-- freemarker模板包版本 -->
+    <freemarker.version>2.3.23</freemarker.version>
   </properties>
   <dependencies>
     <dependency>
@@ -214,6 +216,12 @@
           <groupId>ch.qos.logback</groupId>
           <artifactId>logback-classic</artifactId>
           <version>${logbackVersion}</version>
+        </dependency>
+        <!-- freemarker依赖 -->
+        <dependency>
+          <groupId>org.freemarker</groupId>
+          <artifactId>freemarker</artifactId>
+          <version>${freemarker.version}</version>
         </dependency>
       </dependencies>
   </dependencyManagement>

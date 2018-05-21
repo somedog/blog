@@ -11,12 +11,12 @@ import java.io.Serializable;
  * @author xiaohuyao
  * @since 2018-05-21
  */
-public class User extends Model<User> {
+public class Article extends Model<Article> {
 
     private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private String username;
+	private String content;
 
 
 	public Integer getId() {
@@ -27,12 +27,12 @@ public class User extends Model<User> {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getContent() {
+		return content;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	@Override
@@ -42,9 +42,9 @@ public class User extends Model<User> {
 
 	@Override
 	public String toString() {
-		return "User{" +
+		return "Article{" +
 			"id=" + id +
-			", username=" + username +
+			", content=" + content +
 			"}";
 	}
 }
